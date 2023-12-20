@@ -1,3 +1,3 @@
 #python3
 
-print("hello python")
+print("hello smiley python")
