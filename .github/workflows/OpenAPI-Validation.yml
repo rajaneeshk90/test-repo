@@ -19,7 +19,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 16
-          cache: 'npm'
       - run: npm install -g beckn-spec-validator
       - run: beckn-spec-validator -b api/meta/build/meta.yaml -v false
 
@@ -33,7 +32,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 16
-          cache: 'npm'
       - run: npm install -g beckn-spec-validator
       - run: beckn-spec-validator -b api/registry/build/registry.yaml -v false
 
@@ -47,6 +45,5 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 16
-          cache: 'npm'
       - run: npm install -g beckn-spec-validator
       - run: beckn-spec-validator -b api/transaction/build/transaction.yaml -v false
