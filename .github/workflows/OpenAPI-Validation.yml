@@ -10,7 +10,7 @@ on:
 
 jobs:
   validate_openapi_schema_meta:
-    name: Validate OpenAPI Schema for Meta
+    name: Validate OpenAPI Schemas
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -19,31 +19,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 16
-      - run: npm install -g beckn-spec-validator
-      - run: beckn-spec-validator -b api/meta/build/meta.yaml -v false
-
-  validate_openapi_schema_registry:
-    name: Validate OpenAPI Schema for registry
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Install Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 16
-      - run: npm install -g beckn-spec-validator
-      - run: beckn-spec-validator -b api/registry/build/registry.yaml -v false
-
-  validate_openapi_schema_transaction:
-    name: Validate OpenAPI Schema for transaction
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Install Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 16
-      - run: npm install -g beckn-spec-validator
-      - run: beckn-spec-validator -b api/transaction/build/transaction.yaml -v false
+      - name: install Beckn validator tool for spec
+        run: npm install -g beckn-spec-validator
+      - name: Validate meta file
+        run: beckn-spec-validator -b api/meta/build/meta.yaml -v false
+      - name: Validate registry file
+        run: beckn-spec-validator -b api/registry/build/registry.yaml -v false
+      - name: Validate transaction file
+        run: beckn-spec-validator -b api/transaction/build/transaction.yaml -v false
