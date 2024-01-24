@@ -4,47 +4,49 @@ on:
   pull_request:
     branches:
       - main
+  push:
+    branches:
       - draft
 
 jobs:
   validate_openapi_schema_meta:
     name: Validate OpenAPI Schema for Meta
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Validate OpenAPI schema for meta.yaml
-        id: validate_meta
-        uses: thiyagu06/openapi-validator-action@v1
-        with:
-          filepath: "./api/meta/build/meta.yaml"
+      - name: Install Node
+      - uses: actions/setup-node@v4
+          with:
+            node-version: 16
+            cache: 'npm'
+      - run: npm install -g beckn-spec-validator
+      - run: beckn-spec-validator -b api/meta/build/meta.yaml -v false
 
   validate_openapi_schema_registry:
     name: Validate OpenAPI Schema for registry
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Validate OpenAPI schema for registry.yaml
-        id: validate_registry
-        uses: thiyagu06/openapi-validator-action@v1
-        with:
-          filepath: "./api/registry/build/registry.yaml"
+      - name: Install Node
+      - uses: actions/setup-node@v4
+          with:
+            node-version: 16
+            cache: 'npm'
+      - run: npm install -g beckn-spec-validator
+      - run: beckn-spec-validator -b api/registry/build/registry.yaml -v false
 
   validate_openapi_schema_transaction:
     name: Validate OpenAPI Schema for transaction
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Validate OpenAPI schema for transaction.yaml
-        id: validate_transaction
-        uses: thiyagu06/openapi-validator-action@v1
-        with:
-          filepath: "./api/transaction/build/transaction.yaml"
+      - name: Install Node
+      - uses: actions/setup-node@v4
+          with:
+            node-version: 16
+            cache: 'npm'
+      - run: npm install -g beckn-spec-validator
+      - run: beckn-spec-validator -b api/transaction/build/transaction.yaml -v false
