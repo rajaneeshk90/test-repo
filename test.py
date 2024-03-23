@@ -2,4 +2,4 @@ print("test")
 print("done")
 #com
 #print("python")
-var a
+var a = "aa"
