@@ -1,23 +1,16 @@
-#
+
 pipeline {
     agent any
 
     stages {
         stage('Hello') {
             steps {
+                checkout scmGit(branches: [[name: '*/draft']], extensions: [], userRemoteConfigs: [[credentialsId: 'gitroot', url: 'https://github.com/rajaneeshk90/test-repo.git']])
                 echo 'Hello World'
             }
         }
     }
-    post {
-        always {
-        	cleanWs(cleanWhenNotBuilt: false,
-            	deleteDirs: true,
-            	disableDeferredWipeout: true,
-            	notFailBuild: true,
-            	patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
-            	[pattern: '.propsfile', type: 'EXCLUDE']])
-     	}
-   }
 }
+
+
 
